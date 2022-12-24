@@ -1,3 +1,63 @@
+# Lego_LOAM_20.04
+
+1. gtsam 4.1.1 설치
+https://github.com/borglab/gtsam 에서 4.1.1 release 다운 받고 다운 받은 root폴더에서
+```
+mkdir build
+cd build
+cmake ..
+make check (optional, runs unit tests)
+make install
+```
+
+2. opencv 4.4.0 설치  <br/>https://velog.io/@minukiki/Ubuntu-20.04%EC%97%90-OpenCV-4.4.0-%EC%84%A4%EC%B9%98
+
+
+2. LeGO-LOAM WS에 다운 
+<br/>https://github.com/RobustFieldAutonomyLab/LeGO-LOAM
+
+
+3. CmakeList.txt 교체 (https://github.com/RobustFieldAutonomyLab/LeGO-LOAM/issues/247)
+
+
+4. LeGO-LOAM의 include 폴더의 utility.h 파일에서 다음과 같이 변경 https://leedaehan.tistory.com/3
+<br/>Before 
+<br/>#include <opencv/cv.h> <br/>   
+    After 
+<br/>#include <opencv2/imgproc.hpp>
+
+
+5. RVIZ에서 "error Failed to transform from frame [/camera] to frame [map]"라는 메세지와 함께 맵과 포인트클라우드가 출력이 안됨
+    /camera to camera and /camera_init to camera_init 로 /제거 하면 됨
+
+
+6. ros launch param 수정
+```
+<param name="pointCloudTopic_param" type="string" value="/spot1/velodyne_points"/> 
+<param name="imuTopic_param" type="string" value="/spot1/vn100/imu"/>
+```
+
+7. 소스코드에서 ros param 수정
+    utility.h 에서 다음과 같이 주석처리 및 const 없애기
+```
+// extern const string pointCloudTopic = "/velodyne_points";
+extern string pointCloudTopic = "/velodyne_points";
+
+// extern const string imuTopic = "/imu/data";
+extern string imuTopic = "/imu/data";>
+```
+imageProjection.cpp main에 클래스 인스턴스화 전에 다음 추가
+
+ros::param::get("pointCloudTopic_param", pointCloudTopic);
+
+featureAssociation.cpp main에 클래스 인스턴스화 전에 다음 추가
+
+ros::param::get("imuTopic_param", imuTopic);
+
+mapOptmization.cpp main에 클래스 인스턴스화 전에 다음 추가
+
+ros::param::get("imuTopic_param", imuTopic);
+
 # LeGO-LOAM
 
 This repository contains code for a lightweight and ground optimized lidar odometry and mapping (LeGO-LOAM) system for ROS compatible UGVs. The system takes in point cloud  from a Velodyne VLP-16 Lidar (palced horizontally) and optional IMU data as inputs. It outputs 6D pose estimation in real-time. A demonstration of the system can be found here -> https://www.youtube.com/watch?v=O3tz_ftHV48
@@ -140,4 +200,7 @@ An optimized version of LeGO-LOAM can be found [here](https://github.com/faconti
     + To convert a multi-process application into a single-process / multi-threading one; this makes the algorithm more deterministic and slightly faster.
     + To make it easier and faster to work with rosbags: processing a rosbag should be done at maximum speed allowed by the CPU and in a deterministic way.
     + As a consequence of the previous point, creating unit and regression tests will be easier.
-# Lego_LOAM_20.04
+
+
+
+
