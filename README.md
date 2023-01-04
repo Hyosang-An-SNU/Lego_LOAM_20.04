@@ -1,5 +1,7 @@
 # Lego_LOAM_20.04
 
+해당 깃허브에 올라온 패키지는 아래 사항이 적용된 
+
 1. gtsam 4.1.1 설치
 https://github.com/borglab/gtsam 에서 4.1.1 release 다운 받고 다운 받은 root폴더에서
 ```
@@ -10,7 +12,7 @@ make check (optional, runs unit tests)
 sudo make install
 ```
 
-2. opencv 4.4.0 설치  <br/>https://velog.io/@minukiki/Ubuntu-20.04%EC%97%90-OpenCV-4.4.0-%EC%84%A4%EC%B9%98
+2. opencv 4.4.0 설치 (생략 가능)  <br/>https://velog.io/@minukiki/Ubuntu-20.04%EC%97%90-OpenCV-4.4.0-%EC%84%A4%EC%B9%98
 
 
 2. LeGO-LOAM WS에 다운 
