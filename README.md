@@ -7,7 +7,7 @@ mkdir build
 cd build
 cmake ..
 make check (optional, runs unit tests)
-make install
+sudo make install
 ```
 
 2. opencv 4.4.0 설치  <br/>https://velog.io/@minukiki/Ubuntu-20.04%EC%97%90-OpenCV-4.4.0-%EC%84%A4%EC%B9%98
