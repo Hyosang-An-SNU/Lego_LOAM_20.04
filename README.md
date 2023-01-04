@@ -1,6 +1,6 @@
 # Lego_LOAM_20.04
 
-해당 깃허브에 올라온 패키지는 아래 사항이 적용된 
+해당 깃허브에 올라온 패키지는 아래 사항이 적용된 버전임.
 
 1. gtsam 4.1.1 설치
 https://github.com/borglab/gtsam 에서 4.1.1 release 다운 받고 다운 받은 root폴더에서
